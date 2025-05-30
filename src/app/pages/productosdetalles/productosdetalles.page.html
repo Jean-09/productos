@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>productosdetalles</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col offset-xs="1" size-xs="12" offset-md="1" size-md="12" offset-xl="1" size-xl="10">
+        <ion-card *ngIf="product!=''">
+          <ion-card-header>
+            <img src="{{product.images}}"><br>
+            <ion-card-subtitle>{{product.title}}</ion-card-subtitle>
+            <ion-card-title>{{product.description}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-icon name="cash"></ion-icon>{{product.price}} <br>
+            <ion-icon name="trending-up"></ion-icon>
+            {{product.discountPercentage}} <br>
+
+            <ng-container *ngFor="let star of getStarIcons(product.rating)">
+              <ion-icon [name]="star"></ion-icon>
+            </ng-container> <br>
+            <ion-icon name="podium"></ion-icon>
+            {{product.stock}} <br>
+            <ion-icon name="pricetags"></ion-icon>
+            {{product.tags}} <br>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    </ion-grid>
+</ion-content>

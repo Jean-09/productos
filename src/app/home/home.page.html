@@ -1,20 +1,40 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>Empleados</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let p of products" offset-xs="1" size-xs="10" offset-md="1" size-md="4" offset-xl="0.8"
+        size-xl="2">
+        <ion-card (click)="verDetalles(p.id)">
+          <ion-card-header>
+            <img src="{{p.images}}"><br>
+            <ion-card-subtitle>{{p.title}}</ion-card-subtitle>
+            <ion-card-title>{{p.description}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-icon name="cash"></ion-icon>{{p.price}} <br>
+            <ion-icon name="trending-up"></ion-icon>
+            {{p.discountPercentage}} <br>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+            <ng-container *ngFor="let star of getStarIcons(p.rating)">
+              <ion-icon [name]="star"></ion-icon>
+            </ng-container> <br>
+            <ion-icon name="podium"></ion-icon>
+            {{p.stock}} <br>
+            <ion-icon name="pricetags"></ion-icon>
+            {{p.tags}} <br>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+  <ion-infinite-scroll threshold="25%" position="bottom" (ionInfinite)="getProdu($event)">
+    <ion-infinite-scroll-content loadingSpinner="circular">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
