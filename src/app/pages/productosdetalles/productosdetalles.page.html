@@ -10,28 +10,34 @@
 <ion-content [fullscreen]="true">
   <ion-grid>
     <ion-row>
-      <ion-col offset-xs="1" size-xs="12" offset-md="1" size-md="12" offset-xl="1" size-xl="10">
-        <ion-card *ngIf="product!=''">
-          <ion-card-header>
-            <img src="{{product.images}}"><br>
-            <ion-card-subtitle>{{product.title}}</ion-card-subtitle>
-            <ion-card-title>{{product.description}}</ion-card-title>
-          </ion-card-header>
+      <ion-col size-xl="10" offset-xl="1"> <!-- Centrado y con margen -->
+        <ion-card>
           <ion-card-content>
-            <ion-icon name="cash"></ion-icon>{{product.price}} <br>
-            <ion-icon name="trending-up"></ion-icon>
-            {{product.discountPercentage}} <br>
-
-            <ng-container *ngFor="let star of getStarIcons(product.rating)">
-              <ion-icon [name]="star"></ion-icon>
-            </ng-container> <br>
-            <ion-icon name="podium"></ion-icon>
-            {{product.stock}} <br>
-            <ion-icon name="pricetags"></ion-icon>
-            {{product.tags}} <br>
+            <ion-grid>
+              <ion-row>
+                <ion-col size-xl="6">
+                  <img src="{{product.images}}"><br>
+                </ion-col>
+                <ion-col size-xl="6">
+                  <ion-card-subtitle>{{product.title}}</ion-card-subtitle><br>
+                  <ion-card-title>{{product.description}}</ion-card-title> <br>
+                  <ion-icon name="cash"></ion-icon>{{product.price}} <br>
+                  <ion-icon name="trending-up"></ion-icon>
+                  {{product.discountPercentage}} <br>
+                  <ng-container *ngFor="let star of getStarIcons(product.rating)">
+                    <ion-icon [name]="star"></ion-icon>
+                  </ng-container> <br>
+                  <ion-icon name="podium"></ion-icon>
+                  {{product.stock}} <br>
+                  <ion-icon name="pricetags"></ion-icon>
+                  {{product.tags}} <br>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
           </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
-    </ion-grid>
+  </ion-grid>
 </ion-content>
+
