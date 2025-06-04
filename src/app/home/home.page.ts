@@ -10,27 +10,27 @@ import { Router } from '@angular/router';
 })
 export class HomePage implements OnInit {
 
-  constructor(private api:ApiService, private route: Router) {}
+  constructor(private api: ApiService, private route: Router) { }
   ngOnInit() {
-    
+
     this.getProdu();
   }
 
-  skip:number=0
-  products: any[]=[];
-  calificacion: any[]=[];
+  skip: number = 0
+  products: any[] = [];
+  calificacion: any[] = [];
 
-  getProdu(event?:any){
-    
-    this.api.getPoducts(this.skip).then((res)=>{
+  getProdu(event?: any) {
+
+    this.api.getPoducts(this.skip).then((res) => {
       console.log(res)
       this.products.push(...res)
       this.calificacion.push(...res.rating)
-      this.skip+=30;
-      if(event) event.target.complete()
-    }).catch((error)=>{
+      this.skip += 30;
+      if (event) event.target.complete()
+    }).catch((error) => {
       console.log(error)
-      if(event) event.target.complete()
+      if (event) event.target.complete()
     })
   }
 
@@ -47,7 +47,18 @@ export class HomePage implements OnInit {
     ];
   }
 
-  verDetalles(id: number){
+  verDetalles(id: number) {
     this.route.navigateByUrl('/productosdetalles/' + id)
   }
+
+  delProduct(id: string) {
+    this.api.delProductsId(id).then((res) => {
+      console.log(res);
+
+      this.products = this.products.filter(product => product.id !== Number(id));
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
 }
